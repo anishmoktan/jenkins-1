@@ -56,7 +56,7 @@ public class AbstractItemTest {
     }
     
     @Test
-    public void testSearchNameIsName() throws Exception {
+    public void testSearchNameIsName() {
         final String name = "the item name jlrtlekjtekrjkjr";
         StubAbstractItem i = new StubAbstractItem();
         i.doSetName(name);
@@ -121,7 +121,7 @@ public class AbstractItemTest {
         } catch (IOException e) {
 
             //THEN
-            assertEquals(e.getMessage(),"Trying to rename an item that does not support this operation.");
+            assertEquals("Trying to rename an item that does not support this operation.", e.getMessage());
             assertEquals("NameNotEditableItem",item.getName());
         }
     }
@@ -140,7 +140,7 @@ public class AbstractItemTest {
         } catch (Failure f) {
 
             //THEN
-            assertEquals(f.getMessage(),"Trying to rename an item that does not support this operation.");
+            assertEquals("Trying to rename an item that does not support this operation.", f.getMessage());
             assertEquals("NameNotEditableItem",item.getName());
         }
     }
