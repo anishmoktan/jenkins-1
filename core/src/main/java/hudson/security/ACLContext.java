@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package hudson.security;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -52,7 +53,7 @@ public class ACLContext implements AutoCloseable {
     /**
      * Accessor for the previous context.
      * @return the previous context.
-     * @since TODO
+     * @since 2.266
      */
     @NonNull
     public SecurityContext getPreviousContext2() {

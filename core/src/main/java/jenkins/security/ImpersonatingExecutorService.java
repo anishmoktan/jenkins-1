@@ -44,7 +44,7 @@ public final class ImpersonatingExecutorService extends InterceptingExecutorServ
      * Creates a wrapper service.
      * @param base the base service
      * @param authentication for example {@link ACL#SYSTEM2}
-     * @since TODO
+     * @since 2.266
      */
     public ImpersonatingExecutorService(ExecutorService base, Authentication authentication) {
         super(base);
@@ -61,24 +61,18 @@ public final class ImpersonatingExecutorService extends InterceptingExecutorServ
 
     @Override
     protected Runnable wrap(final Runnable r) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                try (ACLContext ctxt = ACL.as2(authentication)) {
-                    r.run();
-                }
+        return () -> {
+            try (ACLContext ctxt = ACL.as2(authentication)) {
+                r.run();
             }
         };
     }
 
     @Override
     protected <V> Callable<V> wrap(final Callable<V> r) {
-        return new Callable<V>() {
-            @Override
-            public V call() throws Exception {
-                try (ACLContext ctxt = ACL.as2(authentication)) {
-                    return r.call();
-                }
+        return () -> {
+            try (ACLContext ctxt = ACL.as2(authentication)) {
+                return r.call();
             }
         };
     }
